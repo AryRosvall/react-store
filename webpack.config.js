@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const DotenvWebpackPlugin = require('dotenv-webpack')
@@ -48,6 +49,18 @@ module.exports = {
       filename: 'assets/[name].css',
     }),
     new DotenvWebpackPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        CLIENT_ID_PAYPAL: JSON.stringify(process.env.CLIENT_ID_PAYPAL),
+        CLIENT_ID_GOOGLE_MAPS: JSON.stringify(
+          process.env.CLIENT_ID_GOOGLE_MAPS
+        ),
+        CLIENT_ID_POSITIONSTACK: JSON.stringify(
+          process.env.CLIENT_ID_POSITIONSTACK
+        ),
+        FIREBASE_TOKEN: JSON.stringify(process.env.FIREBASE_TOKEN),
+      },
+    }),
   ],
   devServer: {
     contentBase: './',
