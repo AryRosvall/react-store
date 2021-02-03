@@ -1,8 +1,9 @@
 const path = require('path')
-const webpack = require('webpack')
+/* const webpack = require('webpack') */
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const DotenvWebpackPlugin = require('dotenv-webpack')
+/* const DotenvWebpackPlugin = require('dotenv-webpack') */
+const { EnvironmentPlugin } = require('webpack')
 
 module.exports = {
   entry: './src/index.js',
@@ -48,7 +49,12 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'assets/[name].css',
     }),
-    new DotenvWebpackPlugin({ systemvars: true }),
+    /* new DotenvWebpackPlugin({ systemvars: true }), */
+    new EnvironmentPlugin([
+      'CLIENT_ID_PAYPAL',
+      'CLIENT_ID_GOOGLE_MAPS',
+      'CLIENT_ID_POSITIONSTACK',
+    ]),
   ],
   devServer: {
     contentBase: './',

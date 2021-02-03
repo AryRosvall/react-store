@@ -3,12 +3,6 @@ on:
   push:
     branches:
       - main
-env:
-  CLIENT_ID_PAYPAL: ${{secrets.CLIENT_ID_PAYPAL }}
-  CLIENT_ID_GOOGLE_MAPS: ${{ secrets.CLIENT_ID_GOOGLE_MAPS }}
-  CLIENT_ID_POSITIONSTACK: ${{ secrets.CLIENT_ID_POSITIONSTACK }}
-  FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-
 jobs:
   build:
     name: Build
@@ -19,7 +13,11 @@ jobs:
       - name: Install Dependencies
         run: npm install
       - name: Build
-        run: npm run build
+        run: CLIENT_ID_PAYPAL=$CLIENT_ID_PAYPAL CLIENT_ID_GOOGLE_MAPS=$CLIENT_ID_GOOGLE_MAPS CLIENT_ID_POSITIONSTACK=$CLIENT_ID_POSITIONSTACK npm run build
+        env:
+            CLIENT_ID_PAYPAL: ${{secrets.CLIENT_ID_PAYPAL }}
+            CLIENT_ID_GOOGLE_MAPS: ${{ secrets.CLIENT_ID_GOOGLE_MAPS }}
+            CLIENT_ID_POSITIONSTACK: ${{ secrets.CLIENT_ID_POSITIONSTACK }}
       - name: Archive Production Artifact
         uses: actions/upload-artifact@main
         with:
@@ -41,8 +39,3 @@ jobs:
         uses: w9jds/firebase-action@main
         with:
           args: deploy --only hosting
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-          CLIENT_ID_PAYPAL: ${{secrets.CLIENT_ID_PAYPAL }}
-          CLIENT_ID_GOOGLE_MAPS: ${{ secrets.CLIENT_ID_GOOGLE_MAPS }}
-          CLIENT_ID_POSITIONSTACK: ${{ secrets.CLIENT_ID_POSITIONSTACK }}
