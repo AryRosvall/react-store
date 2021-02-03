@@ -9,7 +9,7 @@ const Map = ({ data }) => {
     height: '50vh',
     width: '100%',
   }
-
+  console.log(data)
   const defaultCenter = {
     lat: data.lat || 37.68739,
     lng: data.lng || -121.9131115,
