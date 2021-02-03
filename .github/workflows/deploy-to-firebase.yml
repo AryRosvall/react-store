@@ -5,9 +5,9 @@ on:
       - main
 env:
   CLIENT_ID_PAYPAL: ${{secrets.CLIENT_ID_PAYPAL }}
-  CLIENT_ID_GOOGLE_MAPS: ${{secrets.CLIENT_ID_GOOGLE_MAPS}}
-  CLIENT_ID_POSITIONSTACK: ${{secrets.CLIENT_ID_POSITIONSTACK}}
-  FIREBASE_TOKEN: ${{secrets.FIREBASE_TOKEN}}
+  CLIENT_ID_GOOGLE_MAPS: ${{ secrets.CLIENT_ID_GOOGLE_MAPS }}
+  CLIENT_ID_POSITIONSTACK: ${{ secrets.CLIENT_ID_POSITIONSTACK }}
+  FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
 jobs:
   build:
@@ -43,3 +43,6 @@ jobs:
           args: deploy --only hosting
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          CLIENT_ID_PAYPAL: ${{secrets.CLIENT_ID_PAYPAL }}
+          CLIENT_ID_GOOGLE_MAPS: ${{ secrets.CLIENT_ID_GOOGLE_MAPS }}
+          CLIENT_ID_POSITIONSTACK: ${{ secrets.CLIENT_ID_POSITIONSTACK }}
