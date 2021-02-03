@@ -11,8 +11,8 @@ const Map = ({ data }) => {
   }
 
   const defaultCenter = {
-    lat: data.lat,
-    lng: data.lng,
+    lat: data.lat || 37.68739,
+    lng: data.lng || -121.9131115,
   }
 
   return (
